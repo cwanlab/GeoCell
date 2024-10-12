@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 import anndata as ad
 import numpy as np
+import requests
 
 # ========================================================================
 # @Discripiton: GeoCells
@@ -14,7 +15,16 @@ import numpy as np
 
 @st.cache_data
 def load_data():
-    adata = ad.read_h5ad("data/data_final.h5ad")
+    url = "https://www.dropbox.com/scl/fi/5ggx19u6153cza8jndkdp/data_final.h5ad?rlkey=17d9dyfuc1deg2argtmo1rv0l&dl=1"
+    local_path = "data_final.h5ad"
+    
+    # Download the file
+    response = requests.get(url)
+    with open(local_path, "wb") as f:
+        f.write(response.content)
+    
+    # Load the data
+    adata = ad.read_h5ad(local_path)
     return adata
 
 adata = load_data()
