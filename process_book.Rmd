@@ -1,0 +1,46 @@
+---
+title: GeoCell Process Book
+author:
+  - name: Max Melnikas, Lethukuthula Nkambule, Guihong Wan
+---
+
+### Project Steps
+
+#### 1. Identify a dataset
+
+We identified a large genomic dataset of a melanoma tissue sample, containing spatially resolved, multiplexed imaging data at a single-cell resolution. The sample contained 1,110,585 individual cells with 17 unique phenotypes. Information on cell nuclei centroids was captured as (X,Y) coordinates; data on 30 antibody markers was also included. Below are two data summaries: on the left, a table that describes phenotype counts. On the right, an example of three cells with their (X,Y) coordinates.
+
+<img src="figures/DataPhenotypes.png" alt="Phenotype Counts" width="200"/>
+<img src="figures/DataStructure.png" alt="Data Structure" width="400"/>
+
+#### 2. Produce sketches
+
+To explore the spatial dimensions of the dataset, we wanted to produce an (X,Y) grid of cells with their phenotypes encoded as colors.
+
+![XY Spatial View](figures/SpatialSketch.png)
+
+Antibody marker data can be dimensionally reduced using techniques such as TSNE and UMAP to visualize high-level trends. ![Marker Clustdr View](figures/ClusterSketch.png)
+
+#### 3. Streamlit implementation
+
+Computational challenges and concerns of over-stimulating the audience led us to truncate our dataset to a random sample of 10,000 cells. Furthermore, the original 17 phenotype labels were reduced to 13 by grouping *T cells*, *Terminally Exhausted T cells*, *Partially Exhausted T cells*, *Regulatory T cells*, and *Cytotoxic T cells* under one single *T cells* category. Certain features, particularly the magnifying class and zoom-in features were deemed unnecessary.
+
+### Inisghts
+
+* Tumor cells have a spatial concentration in the northwest quadrant of the the tissue sample
+* Both UMAP and TSNE are well suited to identify tumor cells using Leiden and K-means clustering
+* There is a dense concentration of unknown cells at the top of the sample which indicates that phenotype missingness is not at random
+
+### Future work
+
+Inter-phenotype cell interactions are a key source of cancer biologists' interests. A natural extension of this visualization would be a feature that allows for selection of multiple phenotypes for viewing in the (X,Y) coordinate scatter plot.
+
+As mentioned in the streamlit implementation section, 10,000 cells were randomly sampled from the initial dataset. A visual method that facilitates plotting of larger sample sizes with dynamic zooming is another interesting future direction.
+
+### Contribution
+
+Max:
+
+Lindo:
+
+Guihong:
